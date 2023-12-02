@@ -1,0 +1,4 @@
+.splitScreen {
+  display: flex;
+  flex-direction: row;
+}
