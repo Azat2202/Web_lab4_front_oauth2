@@ -7,19 +7,21 @@ import LoginForm from "../../components/LoginForm";
 
 function LoginPage(){
     return (
-        <VerticalSplitContainer>
+        <>
+            <VerticalSplitContainer>
 
-            <VerticalSplitPart position={"leftPane"} width={60}>
-                <Header/>
-                <Clock updateInterval={1000}/>
-            </VerticalSplitPart>
+                <VerticalSplitPart position={"leftPane"} width={60}>
+                    <Header/>
+                    <Clock updateInterval={1000}/>
+                </VerticalSplitPart>
 
-            <VerticalSplitPart position={"rightPane"}>
-                <LoginForm/>
-            </VerticalSplitPart>
+                <VerticalSplitPart position={"rightPane"}>
+                    <LoginForm/>
+                </VerticalSplitPart>
 
-        </VerticalSplitContainer>
-    )
+            </VerticalSplitContainer>
+        </>
+    );
 }
 
 export default LoginPage;

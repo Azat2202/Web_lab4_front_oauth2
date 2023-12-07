@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './utils/reportWebVitals';
 import LoginPage from "./views/LoginPage";
-import {BrowserRouter, createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Dots from "./views/Dots";
 import ErrorPage from "./views/ErrorPage";
+import {Toaster} from "react-hot-toast";
+import { Provider } from 'react-redux'
+import { store } from './redux/store';
 
 const router = createBrowserRouter(
     [
@@ -30,7 +33,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-      <RouterProvider router={router}/>
+      <Provider store={store}>
+          <Toaster
+              position="top-right"
+              reverseOrder={false}
+          />
+          <RouterProvider router={router}/>
+      </Provider>
   </React.StrictMode>
 );
 
