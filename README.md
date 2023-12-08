@@ -2,4 +2,8 @@
 ### Сиразетдинов Азат P3216 
 ### Вариант 1234
 
-React
+Features: 
+- TypeScript
+- React
+- Redux
+- todo: Tailwind
