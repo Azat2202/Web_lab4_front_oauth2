@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./clock.css"
 
 function Clock({updateInterval}: {updateInterval: number}){
@@ -17,10 +17,10 @@ function Clock({updateInterval}: {updateInterval: number}){
     const ss = day.getSeconds() * deg;
 
     return (
-        <div className="clock">
-            <div className="hour" style={{transform: `rotateZ(${hh + mm / 12}deg)`}}/>
-            <div className="min" style={{transform: `rotateZ(${mm}deg)`}}/>
-            <div className="sec" style={{transform: `rotateZ(${ss}deg)`}}/>
+        <div className="clock h-96 w-96 ">
+            <div className="hour h-36 w-36" style={{transform: `rotateZ(${hh + mm / 12}deg)`}}/>
+            <div className="min h-56 w-56" style={{transform: `rotateZ(${mm}deg)`}}/>
+            <div className="sec h-64 w-64" style={{transform: `rotateZ(${ss}deg)`}}/>
         </div>
     )
 }

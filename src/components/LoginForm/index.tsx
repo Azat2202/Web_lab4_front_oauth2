@@ -62,25 +62,36 @@ function LoginForm() {
     }
 
     return (
-        <form>
+        <form className="space-y-8">
             <div>
+                <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
                 <input type={"text"}
-                       placeholder={"Login"}
-                       name={"username"}
                        autoFocus={true}
+                       id={"username"}
+                       className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none
+                       focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                        onChange={event => setNewLogin(event.target.value)}/>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                 <input type={"password"}
-                       placeholder={"Password"}
                        name={"password"}
+                       id={"password"}
+                       className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none
+                       focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                        onChange={event => setNewPassword(event.target.value)}/>
             </div>
             <div>
                 <button onClick={event => loginRequest(event, newLogin, newPassword)}
-                        value={newLogin}>
+                        value={newLogin}
+                        className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none
+                        focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300">
                     Login
                 </button>
+            </div>
+            <div>
                 <button onClick={event => registerRequest(event, newLogin, newPassword)}
-                        value={newPassword}>
+                        value={newPassword}
+                        className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none
+                        focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300">
                     Register
                 </button>
             </div>

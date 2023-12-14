@@ -1,6 +1,4 @@
-import React, {Dispatch, SetStateAction} from "react";
-import {Coordinates} from "../InputFileds/InputFieldContext";
-import {AuthorizationStore} from "../../redux/authorizationStore";
+import React from "react";
 
 interface SelectInputProps{
     name: string,

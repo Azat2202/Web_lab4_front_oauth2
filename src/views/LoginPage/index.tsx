@@ -1,30 +1,21 @@
 import React, {useEffect, useRef, useState} from "react";
-import VerticalSplitContainer from "../../containers/VerticalSplitContainter/VerticalSplitContainer";
-import VerticalSplitPart from "../../containers/VerticalSplitContainter/VerticalSplitPart";
 import Header from "../../components/Header";
 import Clock from "../../components/Clock";
 import LoginForm from "../../components/LoginForm";
-import {useNavigate} from "react-router-dom";
-import {AuthorizationStore} from "../../redux/authorizationStore";
-import {getLogin} from "../../redux/login";
-import {getPassword} from "../../redux/password";
 
 function LoginPage(){
     return (
-        <>
-            <VerticalSplitContainer>
-
-                <VerticalSplitPart position={"leftPane"} width={60}>
+        <div className="flex h-screen">
+            <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+                <Clock updateInterval={1000}/>
+            </div>
+            <div className="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
+                <div className="max-w-md w-full p-6">
                     <Header/>
-                    <Clock updateInterval={1000}/>
-                </VerticalSplitPart>
-
-                <VerticalSplitPart position={"rightPane"}>
                     <LoginForm/>
-                </VerticalSplitPart>
-
-            </VerticalSplitContainer>
-        </>
+                </div>
+            </div>
+        </div>
     );
 }
 

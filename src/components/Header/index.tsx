@@ -16,8 +16,8 @@ function Header(props: HeaderInterface){
     }
     return (
         <div>
-            <p>Сиразетдинов Азат Ниязович P3216</p>
-            <p>Вариант 1234</p>
+            <h1 className="text-3xl font-semibold mb-6 text-black text-center">Лабораторная работа 4</h1>
+            <h1 className="text-xs font-semibold mb-6 text-center">Сиразетдинов Азат Ниязович 1234</h1>
             {props.loginButton
             ? <Link to={"/"} onClick={logOut}>LOG OUT</Link>
             : <></>}

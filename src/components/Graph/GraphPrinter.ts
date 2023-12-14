@@ -1,14 +1,8 @@
-import {Coordinates, DotsFormContext} from "../InputFileds/InputFieldContext";
-import toast from "react-hot-toast";
-import {getLogin} from "../../redux/login";
-import {AuthorizationStore} from "../../redux/authorizationStore";
-import {getPassword} from "../../redux/password";
-import React, {useContext} from "react";
+import {Coordinates} from "../InputFileds/InputFieldContext";
 
 class GraphPrinter{
     SIZE = 300;
     LINE_WIDTH = 2;
-    TEXT_SIZE = 20;
     TEXT_MARGIN = 15;
     TEXT_LINE_HEIGHT = 3;
     COLOR_RED = "#b50300"
