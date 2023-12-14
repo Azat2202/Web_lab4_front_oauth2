@@ -4,6 +4,10 @@ import VerticalSplitPart from "../../containers/VerticalSplitContainter/Vertical
 import Header from "../../components/Header";
 import Clock from "../../components/Clock";
 import LoginForm from "../../components/LoginForm";
+import {useNavigate} from "react-router-dom";
+import {AuthorizationStore} from "../../redux/authorizationStore";
+import {getLogin} from "../../redux/login";
+import {getPassword} from "../../redux/password";
 
 function LoginPage(){
     return (

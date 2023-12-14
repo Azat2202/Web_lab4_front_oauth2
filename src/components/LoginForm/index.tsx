@@ -26,17 +26,13 @@ function LoginForm() {
             headers: {"Authorization": "Basic " + btoa(login + ":" + password)}
         })
             .then(response => {
-                if(response.status === 200){
-                    throw Error('Navigate to dots')
+                if(response.ok){
+                    dispatch(setLogin(newLogin))
+                    dispatch(setPassword(newPassword))
+                    navigate("/dots")
+                } else {
+                    toast.error(response.statusText)
                 }
-                return response
-            })
-            .then(response => response.json())
-            .then(response => toast.error(response.message))
-            .catch(error => {
-                dispatch(setLogin(newLogin))
-                dispatch(setPassword(newPassword))
-                navigate("/dots")
             })
     }
 
@@ -56,17 +52,12 @@ function LoginForm() {
             body: formData
         })
             .then(response => {
-                if(response.status === 200){
-                    throw Error('Navigate to dots')
+                if(response.ok){
+                    dispatch(setLogin(newLogin))
+                    dispatch(setPassword(newPassword))
+                    navigate("/dots")
                 }
-                return response
-            })
-            .then(response => response.json())
-            .then(response => toast.error(response.message))
-            .catch(error => {
-                dispatch(setLogin(newLogin))
-                dispatch(setPassword(newPassword))
-                navigate("/dots")
+                console.log(response)
             })
     }
 
@@ -75,9 +66,12 @@ function LoginForm() {
             <div>
                 <input type={"text"}
                        placeholder={"Login"}
+                       name={"username"}
+                       autoFocus={true}
                        onChange={event => setNewLogin(event.target.value)}/>
                 <input type={"password"}
                        placeholder={"Password"}
+                       name={"password"}
                        onChange={event => setNewPassword(event.target.value)}/>
             </div>
             <div>

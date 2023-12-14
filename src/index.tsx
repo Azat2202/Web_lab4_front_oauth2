@@ -8,7 +8,7 @@ import Dots from "./views/Dots";
 import ErrorPage from "./views/ErrorPage";
 import {Toaster} from "react-hot-toast";
 import { Provider } from 'react-redux'
-import { store } from './redux/store';
+import { AuthorizationStore } from './redux/authorizationStore';
 
 const router = createBrowserRouter(
     [
@@ -33,7 +33,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-      <Provider store={store}>
+      <Provider store={AuthorizationStore}>
           <Toaster
               position="top-right"
               reverseOrder={false}

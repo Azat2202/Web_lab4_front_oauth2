@@ -2,20 +2,27 @@ import React, {ReactNode, useState} from "react";
 
 export interface Coordinates {
     x: number,
-    y: string,
-    r: number
+    y: string | number,
+    r: number,
+    status?: boolean,
+    scriptTime?:boolean,
+    time?: string,
+    ownerLogin?: string
 }
 
 
 export interface CoordinatesStore{
     getX: number,
-    getY: string,
+    getY: string | number,
     getR: number,
+    getDots: Array<Coordinates>,
     setX: (x: number) => void,
     setY: (y: string) => void,
     setR: (r: number) => void,
+    addDot: (dot: Coordinates) => void,
+    setDots: (dots: Array<Coordinates>) => void
 }
-export const StoreContext = React.createContext<CoordinatesStore | null>(null)
+export const DotsFormContext = React.createContext<CoordinatesStore | null>(null)
 
 export const CoordinatesProvider = ({children}: {children: ReactNode}) => {
     const [getCoordinates, setCoordinates] = useState<Coordinates>({
@@ -23,6 +30,8 @@ export const CoordinatesProvider = ({children}: {children: ReactNode}) => {
         y: "-2",
         r: 1
     });
+
+    const [getDots, setDots] = useState<Array<Coordinates>>([])
 
     const updateX = (newX: number) => {
         setCoordinates((prevCoordinates) => ({
@@ -45,18 +54,25 @@ export const CoordinatesProvider = ({children}: {children: ReactNode}) => {
         }));
     };
 
+    const addDot = (dot: Coordinates) => {
+        setDots((prevState) => [...prevState, dot]);
+    };
+
     const store = {
         getX: getCoordinates.x,
         getY: getCoordinates.y,
         getR: getCoordinates.r,
+        getDots: getDots,
+        setDots: setDots,
         setX: updateX,
         setY: updateY,
-        setR: updateR
+        setR: updateR,
+        addDot: addDot
     }
 
     return (
-        <StoreContext.Provider value={store}>
+        <DotsFormContext.Provider value={store}>
             {children}
-        </StoreContext.Provider>
+        </DotsFormContext.Provider>
     )
 }
