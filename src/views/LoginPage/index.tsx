@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from "react";
-import Header from "../../components/Header";
+import React from "react";
+import Header from "../../components/AboutMe";
 import Clock from "../../components/Clock";
 import LoginForm from "../../components/LoginForm";
 

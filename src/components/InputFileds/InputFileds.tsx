@@ -75,21 +75,33 @@ function InputFields() {
     if (!context) return (<></>);
     return (
         <form onSubmit={e=> parseFormSubmit(e)}>
-            <SelectInput name={"X"}
-                         value={context.getX}
-                         value_setter={context.setX}
-                         labels={[-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]}/>
-            <input
-                type={"text"}
-                value={context.getY}
-                onChange={e => context.setY(e.target.value)}
-            />
-            <SelectInput name={"R"}
-                         value={context.getR}
-                         value_setter={context.setR}
-                         labels={[-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]}/>
-            <button type={"submit"}>SUBMIT</button>
-            <button type={"button"} onClick={sendClear}>CLEAR</button>
+            <div className="flex flex-col w-full md:w-80 p-5 bg-gray-300 md:h-full justify-start shadow-xl hover:shadow-2xl">
+                <SelectInput name={"X"}
+                             value={context.getX}
+                             value_setter={context.setX}
+                             label={"Select X: "}
+                             labels={[-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]}/>
+                <label className="font-semibold my-4">Select R: <input
+                    type={"text"}
+                    value={context.getY}
+                    className="bg-gray-700 border border-gray-600 text-sm rounded-md mt-2
+                    border-s-2 block w-full p-2.5 placeholder-gray-400 text-white"
+                    onChange={e => context.setY(e.target.value)}
+                /></label>
+                <SelectInput name={"R"}
+                             value={context.getR}
+                             value_setter={context.setR}
+                             label={"Select R:"}
+                             labels={[-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]}/>
+                <button type={"submit"}
+                        className="w-full bg-gray-900 mt-6 text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none
+                        focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+                >SUBMIT</button>
+                <button type={"button"} onClick={sendClear}
+                        className="w-full bg-gray-900 mt-4 text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none
+                        focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+                >CLEAR</button>
+            </div>
         </form>
     )
 }

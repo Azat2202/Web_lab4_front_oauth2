@@ -5,7 +5,7 @@ export interface Coordinates {
     y: string | number,
     r: number,
     status?: boolean,
-    scriptTime?:boolean,
+    scriptTime?: number,
     time?: string,
     ownerLogin?: string
 }

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import Header from "../../components/Header";
+import Header from "../../components/AboutMe";
 import InputFileds from "../../components/InputFileds/InputFileds";
 import Graph from "../../components/Graph";
 import {CoordinatesProvider, DotsFormContext} from "../../components/InputFileds/InputFieldContext";
@@ -10,6 +10,8 @@ import {getLogin} from "../../redux/login";
 import dotsTable from "../../components/DotsTable";
 import {getPassword} from "../../redux/password";
 import toast from "react-hot-toast";
+import HeaderNav from "../../components/HeaderNav";
+import BoxDiv from "../../containers/BoxDiv";
 
 function Dots(){
     const navigate = useNavigate();
@@ -22,10 +24,18 @@ function Dots(){
 
     return (
         <CoordinatesProvider>
-            <Header loginButton={true}/>
-            <Graph width={300} height={300}/>
-            <InputFileds/>
-            <DotsTable/>
+            <HeaderNav/>
+            <div className="md:flex">
+                <InputFileds/>
+                <div className="flex flex-wrap ">
+                    <BoxDiv>
+                        <Graph width={300} height={300}/>
+                    </BoxDiv>
+                    <BoxDiv>
+                        <DotsTable/>
+                    </BoxDiv>
+                </div>
+            </div>
         </CoordinatesProvider>
     )
 }
