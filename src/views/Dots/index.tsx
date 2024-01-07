@@ -14,14 +14,6 @@ import HeaderNav from "../../components/HeaderNav";
 import BoxDiv from "../../containers/BoxDiv";
 
 function Dots(){
-    const navigate = useNavigate();
-    useEffect(() => {
-        let state = AuthorizationStore.getState()
-        if(getLogin(state).trim() === "" || getPassword(state).trim() === ""){
-            navigate("/");
-        }
-    })
-
     return (
         <CoordinatesProvider>
             <HeaderNav/>
