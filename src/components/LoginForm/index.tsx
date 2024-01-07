@@ -1,14 +1,14 @@
-import React, {useCallback, useState} from "react";
+import React from "react";
 import {useNavigate} from "react-router-dom";
-import {useKeycloak} from "@react-keycloak/web";
+import {useAuth} from "react-oidc-context";
 
 
 function LoginForm() {
-    const {keycloak} = useKeycloak()
-    useNavigate();
-    const login = useCallback(() => {
-        keycloak?.login()
-    }, [keycloak])
+    const auth = useAuth()
+    const navigate = useNavigate()
+    const login = () => {
+        navigate("/dots")
+    }
 
 
     return (

@@ -2,36 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './utils/reportWebVitals';
-import LoginPage from "./views/LoginPage";
-import {BrowserRouter, createBrowserRouter, Route, RouterProvider, Routes} from "react-router-dom";
-import { ReactKeycloakProvider } from '@react-keycloak/web'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Dots from "./views/Dots";
 import ErrorPage from "./views/ErrorPage";
 import {Toaster} from "react-hot-toast";
 import { Provider } from 'react-redux'
 import { AuthorizationStore } from './redux/authorizationStore';
-import keycloak from "./KeyCloak";
 import PrivateRoute from "./containers/PrivatePath";
+import {AuthProvider} from "react-oidc-context";
+import LoginPage from "./views/LoginPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const eventLogger = (event: unknown, error: unknown) => {
-    console.log('onKeycloakEvent', event, error)
-}
-
-const tokenLogger = (tokens: unknown) => {
-    console.log('onKeycloakTokens', tokens)
+const oidcConfig = {
+    authority: "http://localhost:8180/realms/Lab4",
+    client_id: "ReactClient",
+    redirect_uri: "http://localhost:3000/dots",
+    onSigninCallback: () => {
+        window.history.pushState({}, "", "/dots");
+    }
 }
 
 root.render(
-  <ReactKeycloakProvider
-      initOptions={{onLoad: 'login-required'}}
-      authClient={keycloak}
-      onEvent={eventLogger}
-      onTokens={tokenLogger}
-  >
+    <AuthProvider {...oidcConfig}>
       <Provider store={AuthorizationStore}>
           <Toaster
               position="top-right"
@@ -45,7 +40,7 @@ root.render(
               </Routes>
           </BrowserRouter>
       </Provider>
-  </ReactKeycloakProvider>
+    </AuthProvider>
 );
 
 // Report website speed

@@ -1,13 +1,40 @@
-import { useKeycloak } from "@react-keycloak/web";
+import { useAuth } from "react-oidc-context"
 import {ReactNode} from "react";
-import ErrorPage from "../../views/ErrorPage";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
-const PrivateRoute = ({ children }: {children: ReactNode}) => {
-    const { keycloak } = useKeycloak();
+function PrivateRoute({ children } : {children: ReactNode}) {
+    const auth = useAuth()
 
-    const isLoggedIn = keycloak.authenticated;
+    const textAlignStyle = { textAlign: "center" }
+    const subh1Style = { color: 'grey' }
 
-    return isLoggedIn ? <>{children}</> : <ErrorPage/>;
-};
+    if (auth.isLoading) {
+        return (
+            <div>
+                <h1>Keycloak is loading</h1>
+                <h1 >or running authorization code flow with PKCE</h1>
+                <LoadingSpinner/>
+            </div>
+        )
+    }
 
-export default PrivateRoute;
+    if (auth.error) {
+        return (
+            <div>
+                <h1>Oops ...</h1>
+                <h1>{auth.error.message}</h1>
+            </div>
+        )
+    }
+
+    if (!auth.isAuthenticated) {
+        auth.signinRedirect()
+        return null
+    }
+
+    return <>
+        {children}
+        </>
+}
+
+export default PrivateRoute
