@@ -8,22 +8,24 @@ import {getPassword} from "../../redux/password";
 import Dots from "../../views/Dots";
 import {useNavigate} from "react-router-dom";
 import {isNumber} from "util";
+import {useAuth} from "react-oidc-context";
 
 
 function InputFields() {
     const context = useContext(DotsFormContext)
+    const auth = useAuth()
 
     useEffect(() => {
-        fetch("/api/dots", {
+        const token = auth.user?.access_token;
+        fetch("http://localhost:8080/api/dots", {
             method: "GET",
             headers: {
-                "Authorization": "Basic " + btoa(getLogin(AuthorizationStore.getState()) + ":"
-                    + getPassword(AuthorizationStore.getState()))
+                "Authorization": "Bearer " + token
             }
         })
             .then(r => r.json())
             .then(r => context?.setDots(r))
-    }, [])
+    }, [auth])
 
     let validateX = (x: number) => x <= 2 && x >= -2;
     let validateY = (y: string) => parseFloat(y) <= 5 && parseFloat(y) >= -5;
@@ -44,9 +46,10 @@ function InputFields() {
         formData.append("x", context.getX.toString())
         formData.append("y", context.getY.toString())
         formData.append("r", context.getR.toString())
-        fetch("/api/dots", {
+        const token = auth.user?.access_token;
+        fetch("http://localhost:8080/api/dots", {
             method: "POST",
-            headers: {"Authorization": "Basic " + btoa(getLogin(AuthorizationStore.getState()) + ":" + getPassword(AuthorizationStore.getState()))},
+            headers: {"Authorization": "Bearer " + token},
             body: formData
         })
             .then(r => {
@@ -61,9 +64,10 @@ function InputFields() {
     }
 
     function sendClear(){
-        fetch("/api/dots", {
+        const token = auth.user?.access_token;
+        fetch("http://localhost:8080/api/dots", {
             method: "DELETE",
-            headers: {"Authorization": "Basic " + btoa(getLogin(AuthorizationStore.getState()) + ":" + getPassword(AuthorizationStore.getState()))},
+            headers: {"Authorization": "Bearer " + token},
         })
             .then(r => {
                 if (r.ok) {

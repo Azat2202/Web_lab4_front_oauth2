@@ -108,7 +108,6 @@ class GraphPrinter{
     }
 
     drawPoint(x: number, y: number, r: number, success = true) {
-        console.log(x, y, r)
         let r_graph = this.r;
         if(r_graph != null) {
             x *= r_graph / r

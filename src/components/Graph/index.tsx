@@ -6,11 +6,13 @@ import {getLogin} from "../../redux/login";
 import {AuthorizationStore} from "../../redux/authorizationStore";
 import {getPassword} from "../../redux/password";
 import toast from "react-hot-toast";
+import {useAuth} from "react-oidc-context";
 
 
 
 function Graph({width, height}: {width: number, height: number}){
     const context = useContext(DotsFormContext);
+    const auth = useAuth()
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     function fetchCoordinates(x: number, y: number, r: number):void{
@@ -18,9 +20,10 @@ function Graph({width, height}: {width: number, height: number}){
         formData.append("x", x.toFixed(4))
         formData.append("y", y.toFixed(4))
         formData.append("r", r.toFixed(4))
-        fetch("/api/dots", {
+        const token = auth.user?.access_token;
+        fetch("http://localhost:8080/api/dots", {
             method: "POST",
-            headers: {"Authorization": "Basic " + btoa(getLogin(AuthorizationStore.getState()) + ":" + getPassword(AuthorizationStore.getState()))},
+            headers: {"Authorization": "Bearer  " + token},
             body: formData
         })
             .then(r => {
@@ -52,9 +55,10 @@ function Graph({width, height}: {width: number, height: number}){
         formData.append("x", x.toFixed(4))
         formData.append("y", y.toFixed(4))
         formData.append("r", context.getR.toString())
-        fetch("/api/dots", {
+        const token = auth.user?.access_token;
+        fetch("http://localhost:8080/api/dots", {
             method: "POST",
-            headers: {"Authorization": "Basic " + btoa(getLogin(AuthorizationStore.getState()) + ":" + getPassword(AuthorizationStore.getState()))},
+            headers: {"Authorization": "Bearer " + token},
             body: formData
         })
             .then(r => {
