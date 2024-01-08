@@ -67,9 +67,10 @@ function InputFields() {
         const token = auth.user?.access_token;
         fetch("http://localhost:8080/api/dots", {
             method: "DELETE",
-            headers: {"Authorization": "Bearer " + token},
+            headers: {"Authorization": "Bearer " + token, "cors": "false"},
         })
             .then(r => {
+                console.log(r)
                 if (r.ok) {
                     context?.setDots([])
                 }
